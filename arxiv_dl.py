@@ -10,7 +10,7 @@ import argparse
 SITE_NAME = 'arxiv.org'
 s = requests.Session()
 
-def makedirs(path):
+def makedirs(path: str):
     """creates directory if they don't exist"""
     if not os.path.exists(path):
         os.makedirs(path)
