@@ -7,9 +7,6 @@ import requests
 import tarfile,gzip
 import argparse
 
-SITE_NAME = 'arxiv.org'
-s = requests.Session()
-
 def makedirs(path: str):
     """creates directory if they don't exist"""
     if not os.path.exists(path):
@@ -24,6 +21,9 @@ def main():
 
     makedirs(args.dl_dir)
     makedirs(args.extract_dir)
+
+    SITE_NAME = 'arxiv.org'
+    s = requests.Session()
 
     for a in args.ids:
         path = os.path.join('e-print', a)
@@ -60,4 +60,5 @@ def main():
                     with open(extr_path, 'bw+') as f:
                         f.write(gz.read())
 
-main()
+if __name__ == '__main__':   # to run only as a script
+    main()
