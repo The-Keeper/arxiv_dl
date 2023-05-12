@@ -1,2 +1,6 @@
 dl/
 extracted/
+
+# Added by cargo
+
+/target
