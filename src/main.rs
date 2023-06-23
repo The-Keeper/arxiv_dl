@@ -36,7 +36,6 @@ async fn main() -> Result<(), Box<dyn Error>> {
     let extract_dir = Path::new(&extract_dir);
     if let Ok(Some(values)) = matches.try_get_many::<String>("ids") {
         let values: Vec<String> = values.map(|s| s.to_string()).collect();
-        let client = Client::new();
         let client = Client::builder()
             .user_agent(APP_USER_AGENT)
             .build()?;
@@ -44,7 +43,8 @@ async fn main() -> Result<(), Box<dyn Error>> {
             if match_arxiv_id(&id) {
                 let path_to_dl = dl_dir.join(&id).display().to_string();
                 let url = concat_string!("https://", WEB_URL, "/e-print/", &id);
-                let res = download_file(&client, &url, &path_to_dl).await;
+                let _res = download_file(&client, &url, &path_to_dl).await;
+
                 let path_to_extract = extract_dir.join(&id).display().to_string();
 
                 let tar_gz = fs::File::open(path_to_dl)?;
