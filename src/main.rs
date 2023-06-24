@@ -1,10 +1,9 @@
 extern crate clap;
-use clap::{arg, command, parser::ValuesRef};
+use clap::{arg, command};
 
 use std::{cmp::min, error::Error};
 use std::fs;
-use std::os::unix::fs::MetadataExt;
-use std::io::{Write,Cursor};
+use std::io::Write;
 use std::path::Path;
 use flate2::read::GzDecoder;
 use tar::Archive;
