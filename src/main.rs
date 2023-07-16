@@ -111,14 +111,14 @@ pub async fn download_file(client: &Client, url: &str, path: &str) -> Result<(),
     let mut stream = res.bytes_stream();
 
     while let Some(item) = stream.next().await {
-        let chunk = item.or(Err(format!("Error while downloading file")))?;
+        let chunk = item.or(Err(String::from("Error while downloading a file")))?;
         file.write_all(&chunk)
-            .or(Err(format!("Error while writing to file")))?;
+            .or(Err("Error while writing to file"))?;
         let new = min(downloaded + (chunk.len() as u64), total_size);
         downloaded = new;
         pb.set_position(new);
     }
 
     pb.finish_with_message(&format!("Downloaded {} to {}", url, path));
-    return Ok(());
+    Ok(())
 }
